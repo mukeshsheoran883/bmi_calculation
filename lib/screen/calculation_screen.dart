@@ -17,13 +17,12 @@ class _CalculationScreenState extends State<CalculationScreen> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height * 0.03,
             left: MediaQuery.of(context).size.width * 0.04,
             right: MediaQuery.of(context).size.width * 0.04,
           ),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   "BMI CALCULATOR",
@@ -145,7 +144,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           const Text(
                             "WEIGHT",
@@ -205,7 +204,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           const Text(
                             "AGE",
@@ -258,6 +257,17 @@ class _CalculationScreenState extends State<CalculationScreen> {
                       ),
                     ),
                   ],
+                ),
+                TextButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                    //shape: MaterialStateProperty.all(LinearBorder.none),
+                    minimumSize: MaterialStateProperty.all(
+                      const Size(400, 40),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: const Text("CALCULATE"),
                 ),
               ],
             ),
