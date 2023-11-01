@@ -8,6 +8,7 @@ class CalculationScreen extends StatefulWidget {
 }
 
 class _CalculationScreenState extends State<CalculationScreen> {
+  double _currentSliderValue = 180;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +36,8 @@ class _CalculationScreenState extends State<CalculationScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      height: 160,
-                      width: 160,
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      width: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
                         color: const Color(0xFF484149),
                         borderRadius: BorderRadius.circular(20),
@@ -59,8 +60,8 @@ class _CalculationScreenState extends State<CalculationScreen> {
                       ),
                     ),
                     Container(
-                      height: 160,
-                      width: 160,
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      width: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
                         color: const Color(0xFF484149),
                         borderRadius: BorderRadius.circular(20),
@@ -83,6 +84,52 @@ class _CalculationScreenState extends State<CalculationScreen> {
                       ),
                     ),
                   ],
+                ),
+                Container(
+                  height: 160,
+                  width: 400,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF484149),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "HEIGHT",
+                        style: TextStyle(color: Colors.white, fontSize: 30),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            _currentSliderValue.toString(),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 40),
+                          ),
+                          const Text(
+                            "cm",
+                            style: TextStyle(color: Colors.white, fontSize: 25),
+                          ),
+                        ],
+                      ),
+                      Slider(
+                        activeColor: Colors.white,
+                        thumbColor: Colors.red,
+                        inactiveColor: Colors.red,
+                        mouseCursor: MaterialStateMouseCursor.clickable,
+                        value: _currentSliderValue,
+                        max: 200,
+                        divisions: 1000,
+                        label: _currentSliderValue.round().toString(),
+                        onChanged: (double value) {
+                          setState(() {
+                            _currentSliderValue = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
