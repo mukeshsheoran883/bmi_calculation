@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CalculationScreen extends StatefulWidget {
   const CalculationScreen({super.key});
@@ -8,9 +9,17 @@ class CalculationScreen extends StatefulWidget {
 }
 
 class _CalculationScreenState extends State<CalculationScreen> {
-  double _currentSliderValue = 180;
+  double _currentSliderValue = 1.80;
+
   int age = 20;
   int weight = 40;
+  String result = '';
+
+  void calculateBMI() {
+    double meter = _currentSliderValue / 100;
+    double bmi = weight / (meter * meter);
+    result = bmi.toStringAsFixed(2);
+  }
 
   void incrementAge() {
     setState(() {
@@ -19,19 +28,25 @@ class _CalculationScreenState extends State<CalculationScreen> {
   }
 
   void decrementAge() {
-    setState(() {
-      age--;
-    });
-  }void incrementWeight() {
+    if (age > 0) {
+      setState(() {
+        age--;
+      });
+    }
+  }
+
+  void incrementWeight() {
     setState(() {
       weight++;
     });
   }
 
   void decrementWeight() {
-    setState(() {
-      weight--;
-    });
+    if (weight > 0) {
+      setState(() {
+        weight--;
+      });
+    }
   }
 
   @override
@@ -127,7 +142,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            _currentSliderValue.toString(),
+                            _currentSliderValue.toStringAsFixed(2),
                             style: const TextStyle(
                                 color: Colors.white, fontSize: 40),
                           ),
@@ -143,8 +158,8 @@ class _CalculationScreenState extends State<CalculationScreen> {
                         //inactiveColor: Colors.red,
                         mouseCursor: MaterialStateMouseCursor.clickable,
                         value: _currentSliderValue,
-                        max: 200,
-                        divisions: 1000,
+                        max: 300,
+                        divisions: 300,
                         label: _currentSliderValue.round().toString(),
                         onChanged: (double value) {
                           setState(
@@ -170,11 +185,21 @@ class _CalculationScreenState extends State<CalculationScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          const Text(
-                            "WEIGHT",
-                            style: TextStyle(color: Colors.white, fontSize: 30),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "WEIGHT",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 30),
+                              ),
+                              Text(
+                                '(kg,)',
+                                style: TextStyle(color: Colors.white),
+                              )
+                            ],
                           ),
-                           Text(
+                          Text(
                             weight.toString(),
                             style: const TextStyle(
                               color: Colors.white,
@@ -234,7 +259,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
                             "AGE",
                             style: TextStyle(color: Colors.white, fontSize: 30),
                           ),
-                           Text(
+                          Text(
                             age.toString(),
                             style: const TextStyle(
                               color: Colors.white,
@@ -284,14 +309,40 @@ class _CalculationScreenState extends State<CalculationScreen> {
                 ),
                 TextButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                    backgroundColor: MaterialStateProperty.all(
+                      const Color(0xFF615664),
+                    ),
                     //shape: MaterialStateProperty.all(LinearBorder.none),
                     minimumSize: MaterialStateProperty.all(
                       const Size(400, 40),
                     ),
                   ),
-                  onPressed: () {},
-                  child: const Text("CALCULATE"),
+                  onPressed: () {
+                    calculateBMI();
+                    String message;
+                    double bmi = double.parse(result);
+
+                    if (bmi <= 18.5) {
+                      message = 'Underweight';
+                    } else if (bmi <= 24.9) {
+                      message = 'Normal weight';
+                    } else {
+                      message = 'Overweight';
+                    }
+
+                    Fluttertoast.showToast(
+                      msg: message,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                    );
+                  },
+                  child: const Text(
+                    "CALCULATE",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
                 ),
               ],
             ),
