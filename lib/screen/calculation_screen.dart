@@ -1,3 +1,5 @@
+import 'package:bmi_calculation/const/colors_const.dart';
+import 'package:bmi_calculation/const/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -9,50 +11,46 @@ class CalculationScreen extends StatefulWidget {
 }
 
 class _CalculationScreenState extends State<CalculationScreen> {
-  double _currentSliderValue = 1.80;
-
-  int age = 20;
-  int weight = 40;
-  String result = '';
-
   void calculateBMI() {
-    double meter = _currentSliderValue / 100;
-    double bmi = weight / (meter * meter);
-    result = bmi.toStringAsFixed(2);
+    double meter = StringConst.currentSliderValue / 100;
+    double bmi = StringConst.weight / (meter * meter);
+    StringConst.result = bmi.toStringAsFixed(2);
   }
 
   void incrementAge() {
     setState(() {
-      age++;
+      StringConst.age++;
     });
   }
 
   void decrementAge() {
-    if (age > 0) {
+    if (StringConst.age > 0) {
       setState(() {
-        age--;
+        StringConst.age--;
       });
     }
   }
 
   void incrementWeight() {
     setState(() {
-      weight++;
+      StringConst.weight++;
     });
   }
 
   void decrementWeight() {
-    if (weight > 0) {
-      setState(() {
-        weight--;
-      });
+    if (StringConst.weight > 0) {
+      setState(
+        () {
+          StringConst.weight--;
+        },
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF242225),
+      backgroundColor: ColorsConst.backgroundColor,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
@@ -66,7 +64,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
                 Text(
                   "BMI CALCULATOR",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: ColorsConst.textColor,
                     fontSize: MediaQuery.of(context).size.height * 0.04,
                     fontWeight: FontWeight.bold,
                   ),
@@ -78,22 +76,23 @@ class _CalculationScreenState extends State<CalculationScreen> {
                       height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF484149),
+                        color: ColorsConst.containerColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
                         children: [
                           IconButton(
                             onPressed: () {},
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.male,
-                              color: Colors.white,
+                              color: ColorsConst.textColor,
                               size: 80,
                             ),
                           ),
-                          const Text(
+                          Text(
                             "Male",
-                            style: TextStyle(color: Colors.white, fontSize: 30),
+                            style: TextStyle(
+                                color: ColorsConst.textColor, fontSize: 30),
                           ),
                         ],
                       ),
@@ -102,22 +101,23 @@ class _CalculationScreenState extends State<CalculationScreen> {
                       height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF484149),
+                        color: ColorsConst.containerColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
                         children: [
                           IconButton(
                             onPressed: () {},
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.female_outlined,
-                              color: Colors.white,
+                              color: ColorsConst.textColor,
                               size: 80,
                             ),
                           ),
-                          const Text(
+                          Text(
                             "Female",
-                            style: TextStyle(color: Colors.white, fontSize: 30),
+                            style: TextStyle(
+                                color: ColorsConst.textColor, fontSize: 30),
                           ),
                         ],
                       ),
@@ -128,27 +128,29 @@ class _CalculationScreenState extends State<CalculationScreen> {
                   height: 160,
                   width: 400,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF484149),
+                    color: ColorsConst.containerColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      Text(
                         "HEIGHT",
-                        style: TextStyle(color: Colors.white, fontSize: 30),
+                        style: TextStyle(
+                            color: ColorsConst.textColor, fontSize: 30),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            _currentSliderValue.toStringAsFixed(2),
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 40),
+                            StringConst.currentSliderValue.toStringAsFixed(2),
+                            style: TextStyle(
+                                color: ColorsConst.textColor, fontSize: 40),
                           ),
-                          const Text(
+                          Text(
                             "cm",
-                            style: TextStyle(color: Colors.white, fontSize: 25),
+                            style: TextStyle(
+                                color: ColorsConst.textColor, fontSize: 25),
                           ),
                         ],
                       ),
@@ -157,14 +159,15 @@ class _CalculationScreenState extends State<CalculationScreen> {
                         //thumbColor: Colors.green,
                         //inactiveColor: Colors.red,
                         mouseCursor: MaterialStateMouseCursor.clickable,
-                        value: _currentSliderValue,
+                        value: StringConst.currentSliderValue,
                         max: 300,
                         divisions: 300,
-                        label: _currentSliderValue.round().toString(),
+                        label:
+                            StringConst.currentSliderValue.round().toString(),
                         onChanged: (double value) {
                           setState(
                             () {
-                              _currentSliderValue = value;
+                              StringConst.currentSliderValue = value;
                             },
                           );
                         },
@@ -179,30 +182,32 @@ class _CalculationScreenState extends State<CalculationScreen> {
                       height: MediaQuery.of(context).size.height * 0.25,
                       width: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF484149),
+                        color: ColorsConst.containerColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 "WEIGHT",
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 30),
+                                    color: ColorsConst.textColor, fontSize: 30),
                               ),
                               Text(
                                 '(kg,)',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: ColorsConst.textColor,
+                                ),
                               )
                             ],
                           ),
                           Text(
-                            weight.toString(),
-                            style: const TextStyle(
-                              color: Colors.white,
+                            StringConst.weight.toString(),
+                            style: TextStyle(
+                              color: ColorsConst.textColor,
                               fontSize: 40,
                               fontWeight: FontWeight.bold,
                             ),
@@ -212,31 +217,31 @@ class _CalculationScreenState extends State<CalculationScreen> {
                             children: [
                               IconButton(
                                 onPressed: decrementWeight,
-                                icon: const Center(
+                                icon: Center(
                                   child: Icon(
                                     Icons.remove,
-                                    color: Colors.white,
+                                    color: ColorsConst.textColor,
                                     size: 25,
                                   ),
                                 ),
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
-                                    const Color(0xFF615664),
+                                    ColorsConst.buttonColor,
                                   ),
                                 ),
                               ),
                               IconButton(
                                 onPressed: incrementWeight,
-                                icon: const Center(
+                                icon: Center(
                                   child: Icon(
                                     Icons.add,
-                                    color: Colors.white,
+                                    color: ColorsConst.textColor,
                                     size: 25,
                                   ),
                                 ),
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
-                                    const Color(0xFF615664),
+                                    ColorsConst.buttonColor,
                                   ),
                                 ),
                               ),
@@ -249,20 +254,21 @@ class _CalculationScreenState extends State<CalculationScreen> {
                       height: MediaQuery.of(context).size.height * 0.25,
                       width: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF484149),
+                        color: ColorsConst.containerColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          const Text(
+                          Text(
                             "AGE",
-                            style: TextStyle(color: Colors.white, fontSize: 30),
+                            style: TextStyle(
+                                color: ColorsConst.textColor, fontSize: 30),
                           ),
                           Text(
-                            age.toString(),
-                            style: const TextStyle(
-                              color: Colors.white,
+                            StringConst.age.toString(),
+                            style: TextStyle(
+                              color: ColorsConst.textColor,
                               fontSize: 40,
                               fontWeight: FontWeight.bold,
                             ),
@@ -272,31 +278,31 @@ class _CalculationScreenState extends State<CalculationScreen> {
                             children: [
                               IconButton(
                                 onPressed: decrementAge,
-                                icon: const Center(
+                                icon: Center(
                                   child: Icon(
                                     Icons.remove,
-                                    color: Colors.white,
+                                    color: ColorsConst.textColor,
                                     size: 25,
                                   ),
                                 ),
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
-                                    const Color(0xFF615664),
+                                    ColorsConst.buttonColor,
                                   ),
                                 ),
                               ),
                               IconButton(
                                 onPressed: incrementAge,
-                                icon: const Center(
+                                icon: Center(
                                   child: Icon(
                                     Icons.add,
-                                    color: Colors.white,
+                                    color: ColorsConst.textColor,
                                     size: 25,
                                   ),
                                 ),
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
-                                    const Color(0xFF615664),
+                                    ColorsConst.buttonColor,
                                   ),
                                 ),
                               ),
@@ -310,7 +316,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
                 TextButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                      const Color(0xFF615664),
+                      ColorsConst.buttonColor,
                     ),
                     //shape: MaterialStateProperty.all(LinearBorder.none),
                     minimumSize: MaterialStateProperty.all(
@@ -320,7 +326,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
                   onPressed: () {
                     calculateBMI();
                     String message;
-                    double bmi = double.parse(result);
+                    double bmi = double.parse(StringConst.result);
 
                     if (bmi <= 18.5) {
                       message = 'Underweight';
@@ -333,13 +339,13 @@ class _CalculationScreenState extends State<CalculationScreen> {
                     Fluttertoast.showToast(
                       msg: message,
                       toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
+                      gravity: ToastGravity.CENTER,
                     );
                   },
-                  child: const Text(
+                  child: Text(
                     "CALCULATE",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: ColorsConst.textColor,
                       fontSize: 20,
                     ),
                   ),
