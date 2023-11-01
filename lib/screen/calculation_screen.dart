@@ -9,6 +9,30 @@ class CalculationScreen extends StatefulWidget {
 
 class _CalculationScreenState extends State<CalculationScreen> {
   double _currentSliderValue = 180;
+  int age = 20;
+  int weight = 40;
+
+  void incrementAge() {
+    setState(() {
+      age++;
+    });
+  }
+
+  void decrementAge() {
+    setState(() {
+      age--;
+    });
+  }void incrementWeight() {
+    setState(() {
+      weight++;
+    });
+  }
+
+  void decrementWeight() {
+    setState(() {
+      weight--;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +73,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
                             icon: const Icon(
                               Icons.male,
                               color: Colors.white,
-                              size: 100,
+                              size: 80,
                             ),
                           ),
                           const Text(
@@ -73,7 +97,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
                             icon: const Icon(
                               Icons.female_outlined,
                               color: Colors.white,
-                              size: 100,
+                              size: 80,
                             ),
                           ),
                           const Text(
@@ -115,8 +139,8 @@ class _CalculationScreenState extends State<CalculationScreen> {
                       ),
                       Slider(
                         // activeColor: Colors.white,
-                        thumbColor: Colors.green,
-                        inactiveColor: Colors.red,
+                        //thumbColor: Colors.green,
+                        //inactiveColor: Colors.red,
                         mouseCursor: MaterialStateMouseCursor.clickable,
                         value: _currentSliderValue,
                         max: 200,
@@ -137,7 +161,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.25,
                       width: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
                         color: const Color(0xFF484149),
@@ -150,9 +174,9 @@ class _CalculationScreenState extends State<CalculationScreen> {
                             "WEIGHT",
                             style: TextStyle(color: Colors.white, fontSize: 30),
                           ),
-                          const Text(
-                            "60",
-                            style: TextStyle(
+                           Text(
+                            weight.toString(),
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 40,
                               fontWeight: FontWeight.bold,
@@ -162,12 +186,12 @@ class _CalculationScreenState extends State<CalculationScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               IconButton(
-                                onPressed: () {},
+                                onPressed: decrementWeight,
                                 icon: const Center(
                                   child: Icon(
                                     Icons.remove,
                                     color: Colors.white,
-                                    size: 35,
+                                    size: 25,
                                   ),
                                 ),
                                 style: ButtonStyle(
@@ -177,12 +201,12 @@ class _CalculationScreenState extends State<CalculationScreen> {
                                 ),
                               ),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: incrementWeight,
                                 icon: const Center(
                                   child: Icon(
                                     Icons.add,
                                     color: Colors.white,
-                                    size: 35,
+                                    size: 25,
                                   ),
                                 ),
                                 style: ButtonStyle(
@@ -197,7 +221,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
                       ),
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.25,
                       width: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
                         color: const Color(0xFF484149),
@@ -210,9 +234,9 @@ class _CalculationScreenState extends State<CalculationScreen> {
                             "AGE",
                             style: TextStyle(color: Colors.white, fontSize: 30),
                           ),
-                          const Text(
-                            "28",
-                            style: TextStyle(
+                           Text(
+                            age.toString(),
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 40,
                               fontWeight: FontWeight.bold,
@@ -222,12 +246,12 @@ class _CalculationScreenState extends State<CalculationScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               IconButton(
-                                onPressed: () {},
+                                onPressed: decrementAge,
                                 icon: const Center(
                                   child: Icon(
                                     Icons.remove,
                                     color: Colors.white,
-                                    size: 35,
+                                    size: 25,
                                   ),
                                 ),
                                 style: ButtonStyle(
@@ -237,12 +261,12 @@ class _CalculationScreenState extends State<CalculationScreen> {
                                 ),
                               ),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: incrementAge,
                                 icon: const Center(
                                   child: Icon(
                                     Icons.add,
                                     color: Colors.white,
-                                    size: 35,
+                                    size: 25,
                                   ),
                                 ),
                                 style: ButtonStyle(
