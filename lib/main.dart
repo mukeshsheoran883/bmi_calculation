@@ -1,5 +1,7 @@
+import 'package:bmi_calculation/provider/bmi_provider.dart';
 import 'package:bmi_calculation/screen/calculation_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +20,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const CalculationScreen(),
+      home:  MultiProvider(providers: [
+        ChangeNotifierProvider(create: (context) {
+          return BmiProvider();
+        },)
+      ],
+          child: const CalculationScreen()),
     );
   }
 }
